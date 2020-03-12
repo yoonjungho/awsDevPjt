@@ -92,10 +92,25 @@ public class AwsCtrl {
 			}
 			else if(t < m_tot)
 			{
-				if(preStr.equals("")) preStr =                  num.get(curPos) + " * " + i + "";
-				else                  preStr = preStr + " + " + num.get(curPos) + " * " + i + "";
+				if(len != curPos+1) {
+					if(preStr.equals("")) preStr =                  num.get(curPos) + " * " + i + "";
+					else
+					{
+						if(preStr.indexOf(  num.get(curPos) + " * " + (i+1) ) > -1) {
+							preStr=preStr.replace(num.get(curPos) + " * " + (i+1),num.get(curPos) + " * " + i);
+						}else {
+							preStr = preStr + " + " + num.get(curPos) + " * " + i + "";
+						}
+						
+						
+						
+					}
+					
+				}else {
+					break;
+				}
 				
-				if(i == 0) preStr = "";
+				if(i == 0 && (curPos+1==len || curPos==0)) preStr = "";
 				
 				if(curPos+1 != len) 
 				{
